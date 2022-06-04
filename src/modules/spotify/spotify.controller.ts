@@ -1,13 +1,13 @@
 import { Controller, Post } from '@nestjs/common';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const sgMail = require('@sendgrid/mail');
-import { EmailService } from './email.service';
+import { SpotifyService } from './spotify.service';
 
-@Controller('email')
-export class EmailController {
+@Controller('spotify')
+export class SpotifyController {
   private message: any;
 
-  constructor(private emailService: EmailService) {
+  constructor(private spotifyService: SpotifyService) {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     this.message = {
       to: '',
