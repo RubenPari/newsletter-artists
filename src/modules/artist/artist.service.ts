@@ -7,11 +7,11 @@ import { Repository } from 'typeorm';
 export class ArtistService {
   constructor(private artistRepository: Repository<Artist>) {}
 
-  async GetAll(): Promise<Artist[]> {
+  async getAll(): Promise<Artist[]> {
     return this.artistRepository.find();
   }
 
-  async Insert(artistDto: CreateArtistDto): Promise<boolean> {
+  async insert(artistDto: CreateArtistDto): Promise<boolean> {
     const { id_spotify, name } = artistDto;
 
     const inserted = await this.artistRepository.insert({
@@ -19,10 +19,22 @@ export class ArtistService {
       name,
     });
 
-    if (inserted.raw === 1) {
-      return true;
-    } else {
-      return false;
-    }
+    return inserted.raw === 1;
+  }
+
+  async checkIfExist(name: string) {
+    return await this.artistRepository.findOne({
+      where: {
+        name,
+      },
+    });
+  }
+
+  async delete(name: string) {
+    const deleted = await this.artistRepository.delete({
+      name,
+    });
+
+    return deleted.raw === 1;
   }
 }
