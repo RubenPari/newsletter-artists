@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Cron } from '@nestjs/schedule';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const sgMail = require('@sendgrid/mail');
 
@@ -17,5 +18,16 @@ export class EmailService {
       html: html,
     };
     await sgMail.send(msg);
+  }
+
+  /**
+   * Cron every 1 day
+   * function that check if there a new song
+   * for every artist and (if it there) send
+   * an email
+   */
+  @Cron('* * * 1 * *')
+  async checkNewsSongs() {
+
   }
 }

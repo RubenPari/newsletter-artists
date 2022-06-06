@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { EmailModule } from '../email/email.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SpotifyModule } from '../spotify/spotify.module';
+import { ScheduleModule } from '@nestjs/schedule';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -15,6 +16,7 @@ import { SpotifyModule } from '../spotify/spotify.module';
       database: 'newsletter',
       entities: [],
     }),
+    ScheduleModule.forRoot(),
     EmailModule,
     SpotifyModule,
   ],

@@ -37,4 +37,5 @@ export class ArtistService {
 
     return deleted.raw === 1;
   }
+
 }
